@@ -11,8 +11,11 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { DashboardRoutes } from './DashboardRoutes';
 
+import {RtAdminRoutes} from './RtAdminRoutes';
+
 import { startLogin, login } from '../actions/authAction';
 import {startLoadingElements} from '../actions/generalActions';
+import { RtNoRoutes } from './RtNoRoutes';
 
 export const AppRouter = () => {
 
@@ -26,8 +29,9 @@ export const AppRouter = () => {
     let TOKEN = localStorage.getItem('token');
     let ID = localStorage.getItem('id');
     let USER_ID = localStorage.getItem('user_id');
+    let role = localStorage.getItem('rol_name');
     
-
+   // const role = 'HUMAN_RESOURCE_ADMINs';
 
     useEffect(() => {
         
@@ -48,6 +52,17 @@ export const AppRouter = () => {
             <h1>Espere...</h1>
         )
     }
+
+    let componentes;
+    switch (role) {
+        case 'HUMAN_RESOURCE':
+            componentes = <PrivateRoute path="/" component={ RtAdminRoutes } isAuthenticated={ isLoggedIn } />
+            break;
+    
+        default:
+            componentes =  <PrivateRoute path="/" component={ RtNoRoutes } isAuthenticated={ isLoggedIn } />
+            break;
+    }
     
     return (
         <Router>
@@ -60,11 +75,11 @@ export const AppRouter = () => {
                         isAuthenticated={ isLoggedIn }
                     />
 
-                    <PrivateRoute 
-                        isAuthenticated={ isLoggedIn }
-                        path="/"
-                        component={ DashboardRoutes }
-                    />
+                    {
+                        componentes
+                    }
+
+                    
 
 
                 </Switch>

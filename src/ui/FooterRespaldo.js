@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const Footer = () => {
+export const FooterRespaldo = () => {
     return (
         
         <footer className="page-footer bg-dark">
@@ -21,23 +21,22 @@ export const Footer = () => {
             <div className="container text-center text-md-left mt-5 text-white">
                 <div className="row">
                     <div className="col-md-3 mx-auto mb-4">
-                        <h6 className="text-uppercase font-weight-bold">The developers</h6>
+                        <h6 className="text-uppercase font-weight-bold">The providers</h6>
                         <hr className="bg-success mb-4 mt-0 d-inline-block mx-auto" style={{width:125, height: 2}} />
-                        <p className="mt-2">Los desarrolladores de Mega son los mejores del mundo, pertenecen al departamento de IT donde todos los dias se realizan cosas chidas.</p>
+                        <p className="mt-2">Lisa ksaj dlkasdls adlsal ds ldakjasd lk asjlkd jaslk djas jlasdkl asdlkjsdalkjdsjka  da sdasdasdasd.</p>
                     </div>
                     <div className="col-md-2 mx-auto mb-4">
-                        <h6 className="text-uppercase font-weight-bold">Tecnologias</h6>
+                        <h6 className="text-uppercase font-weight-bold">Products</h6>
                         <hr className="bg-success mb-4 mt-0 d-inline-block mx-auto" style={{width:85, height: 2}} />
                         <ul className="list-unstyled">
                             <li className="my-2 text-white"><a href="google.com" className="text-white">HTML 5</a></li>
                             <li className="my-2 text-white"><a href="google.com" className="text-white">CSS 3</a></li>
-                            <li className="my-2 text-white"><a href="google.com" className="text-white">Bootstrap</a></li>
-                            <li className="my-2 text-white"><a href="google.com" className="text-white">Material</a></li>
+                            <li className="my-2 text-white"><a href="google.com" className="text-white">Bootstrap 4</a></li>
                             <li className="my-2 text-white"><a href="google.com" className="text-white">JavaScript</a></li>
                         </ul>
                     </div>
                     <div className="col-md-2 mx-auto mb-4">
-                        <h6 className="text-uppercase font-weight-bold">Links de interes</h6>
+                        <h6 className="text-uppercase font-weight-bold">Usefull links</h6>
                         <hr className="bg-success mb-4 mt-0 d-inline-block mx-auto" style={{width:110, height: 2}} />
                         <ul className="list-unstyled">
                             <li className="my-2"><a href="google.com" className="text-white">Home</a></li>
@@ -47,19 +46,20 @@ export const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md-3 mx-auto mb-4">
-                        <h6 className="text-uppercase font-weight-bold">Contacto</h6>
+                        <h6 className="text-uppercase font-weight-bold">Contact</h6>
                         <hr className="bg-success mb-4 mt-0 d-inline-block mx-auto" style={{width:75, height: 2}} />
                         <ul className="list-unstyled">
-                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'home']} className="mr-3" />Calle Wallaby, 42, Sidney</li>
-                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'envelope']} className="mr-3" />jfernandez@megatechway.com</li>
-                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'phone']} className="mr-3" />+8990102465</li>
-                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'mobile-alt']} className="mr-3" />+8990196845</li>
+                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'home']} className="mr-3" />Karachi, street 3 PK</li>
+                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'envelope']} className="mr-3" />jfernandez@react.com</li>
+                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'phone']} className="mr-3" />+8999554785</li>
+                            <li className="my-2"><FontAwesomeIcon icon={['fas', 'print']} className="mr-3" />+8999876712</li>
                         </ul>
                     </div>
                 </div>
                 <div className="footer-copyright text-center py-3">
-                        <p> &copy; Copyright - <a href="google.com" className="ml-1 text-white">Mega Techway Inc</a>
+                        <p> &copy; Copyright <a href="google.com" className="ml-1 text-white">theprovider.com</a>
                         </p>
+                        <p>Designed By The Providers</p>
                     </div>
             </div>
         </footer>

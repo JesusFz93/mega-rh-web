@@ -23,6 +23,7 @@ export const startLoginEmailPassword = (param1) => {
                  localStorage.setItem('token-init-date', new Date().getTime() );
                  localStorage.setItem('id', body.elements[0].Id );
                  localStorage.setItem('user_id', body.elements[0].USER_ID );
+                 localStorage.setItem('rol_name', body.elements[0].RolName );
 
                  dispatch(login( body.elements[0].Id, body.elements[0].USER_ID ));
 
