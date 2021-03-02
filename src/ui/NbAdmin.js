@@ -19,8 +19,11 @@ export const NbAdmin = () => {
         dispatch( startLogout() )
     }
 
+    // <nav className="navbar navbar-dark navbar-expand-sm navbar__main">
+
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark " >
+            
             
             <Link 
                 className="navbar-brand" 
@@ -29,8 +32,8 @@ export const NbAdmin = () => {
                 Mega RH Website - ADMIN
             </Link>
 
-            <div className="navbar-collapse">
-                <div className="navbar-nav">
+            <div className="navbar-collapse ">
+                <div className="navbar-nav ">
 
                     <NavLink 
                         activeClassName="active"
@@ -49,13 +52,40 @@ export const NbAdmin = () => {
                     >
                         RolesScreen
                     </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link " 
+                        exact
+                        to="/capturate"
+                    >
+                        Captura_TE
+                    </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/validate"
+                    >
+                        Valida_TE
+                    </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/rechazate"
+                    >
+                        TE_Rechazado
+                    </NavLink>
                 </div>
             </div>
 
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
 
-                    <span className="nav-item nav-link text-info"> 
+                    <span className="nav-item nav-link text-light "> 
                     {name}
                     </span>
 

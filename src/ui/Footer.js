@@ -46,7 +46,7 @@ export const Footer = () => {
                             <li className="my-2"><a href="google.com" className="text-white">Contact</a></li>
                         </ul>
                     </div>
-                    <div className="col-md-3 mx-auto mb-4">
+                    <div className="col-md-4 mx-auto mb-4">
                         <h6 className="text-uppercase font-weight-bold">Contacto</h6>
                         <hr className="bg-success mb-4 mt-0 d-inline-block mx-auto" style={{width:75, height: 2}} />
                         <ul className="list-unstyled">

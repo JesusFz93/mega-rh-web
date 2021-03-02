@@ -6,6 +6,9 @@ import { RolesScreen } from '../components/ScAdmin/RolesScreen';
 
 import { NbAdmin } from '../ui/NbAdmin';
 import { Footer } from '../ui/Footer';
+import { CapturaTiempoExtraScreen } from '../components/screens/CapturaTiempoExtraScreen';
+import { ValidaTiempoExtraScreen } from '../components/screens/ValidaTiempoExtraScreen';
+import { RechazadoTiempoExtraScreen } from '../components/screens/RechazadoTiempoExtraScreen';
 
 export const RtAdminRoutes = () => {
 
@@ -20,10 +23,10 @@ export const RtAdminRoutes = () => {
             <div className="container mt-2">
                 <Switch>
                     <Route exact path="/adminsc" component={ AdminScreen } />
-
-                    
-
                     <Route exact path="/rolessc" component={ RolesScreen } />
+                    <Route exact path="/capturate" component={ CapturaTiempoExtraScreen } />
+                    <Route exact path="/validate" component={ ValidaTiempoExtraScreen } />
+                    <Route exact path="/rechazate" component={ RechazadoTiempoExtraScreen } />
 
                     <Redirect to="/adminsc" />
                 </Switch>

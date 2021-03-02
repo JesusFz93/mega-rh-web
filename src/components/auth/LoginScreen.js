@@ -35,6 +35,7 @@ export const LoginScreen = () => {
         <div className="container login-container">
             <div className="row">
                 <div className="col-md-6 login-form-1">
+                <h3 className="auth__title">Login</h3>
                     <h3>Ingreso</h3>
                     <form onSubmit={ handleLogin }>
                         <div className="form-group">
