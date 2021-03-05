@@ -20,17 +20,45 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const now = moment().minutes(0).seconds(0).add(1,'hours');
+const nowPlus1 = now.clone().add(1, 'hours');
+
+const initEvent = {
+    title: '',
+    notes: '',
+    start: now.toDate(),
+    end: nowPlus1.toDate()
+}
 
 export const CapturaTiempoExtramModal = () => {
 
     const [ dateStart, setDateStart ] = useState( now.toDate() );
+    const [ dateEnd, setDateEnd ] = useState( nowPlus1.toDate() );
+
+    const [formValues, setFormValues] = useState( initEvent );
+
+    const { notes, title, start, end } = formValues;
+
+    const handleInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        });
+    }
 
     const handleStartDateChange = ( e ) => {
-        console.log(e);
+        setDateStart( e );
+        setFormValues({
+            ...formValues,
+            start: e
+        })
     }
     
     const handleEndDateChange = ( e ) => {
-        
+        setDateEnd( e );
+        setFormValues({
+            ...formValues,
+            end: e
+        })
     }
 
     const [isOpen, setIsOpen] = useState(true);
@@ -57,13 +85,21 @@ export const CapturaTiempoExtramModal = () => {
         <DateTimePicker
                         onChange={ handleStartDateChange }
                         value={ dateStart }
+                        maxDate={dateEnd}
                         className="form-control"
+                        format="MM-dd-y"
                     />
     </div>
 
     <div className="form-group">
-        <label>Fecha y hora fin</label>
-        <input className="form-control" placeholder="Fecha inicio" />
+        <label>Fecha y hora inicio</label>
+        <DateTimePicker
+                        onChange={ handleEndDateChange }
+                        value={ dateEnd }
+                        minDate={dateStart}
+                        className="form-control"
+                        format="MM-dd-y"
+                    />
     </div>
 
     <hr />
@@ -75,6 +111,8 @@ export const CapturaTiempoExtramModal = () => {
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
+            value={ title }
+            onChange={ handleInputChange }
         />
         <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
     </div>
@@ -86,6 +124,8 @@ export const CapturaTiempoExtramModal = () => {
             placeholder="Notas"
             rows="5"
             name="notes"
+            value={ notes }
+            onChange={ handleInputChange }
         ></textarea>
         <small id="emailHelp" className="form-text text-muted">Información adicional</small>
     </div>
