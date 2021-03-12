@@ -79,6 +79,15 @@ export const NbAdmin = () => {
                     >
                         TE_Rechazado
                     </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/general"
+                    >
+                        General
+                    </NavLink>
                 </div>
             </div>
 

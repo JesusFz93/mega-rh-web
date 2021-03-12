@@ -1,19 +1,34 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Encabezado } from '../../ui/Encabezado';
 import { TiempoExtraModal } from '../modals/TiempoExtraModal';
 import {useFormulario} from '../../hooks/useForm';
 import Swal from 'sweetalert2';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { appStartGetInsert, appStartGetElementsAction, appStartGetElementAction, appStartUpdateListaAction, appStartDeleteElementAction, appStartInsertListaAction} from '../../actions/dbActions';
+
+
 
 export const CapturaTiempoExtraScreen = () => {
 
-    const [ formValues, handleInputChange, reset ] = useFormulario({
-        te_empleado: ''
-    });
+    const {elementos} = useSelector(state => state.dbReducer)
+    const dispatch = useDispatch();
+
+    const [element, setElement] = useState({});
+
+    const renderObjetos = (item, index) => {
+        return(
+            <li key={index}>{item.id} - {item.value}</li>
+        )
+    }
+
+    const [ formValues, handleInputChange, reset ] = useFormulario({te_empleado: ''});
 
     const { te_empleado } = formValues;
 
     const te_empleado_ref = useRef();
+
+    let content = "";
 
     const handleSearch = () => {
         // El empleado excede las 9 horas
@@ -25,23 +40,88 @@ export const CapturaTiempoExtraScreen = () => {
           })
     }
 
+    const cuerpoPeticion = {
+        "EMPLEADO":""
+    }
+
+    let locals = [];
+
+    if (JSON.parse(localStorage.getItem("lista")) != null) {
+        locals = JSON.parse(localStorage.getItem("lista"));
+    }
+
+    
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-          console.log(te_empleado);
 
+            cuerpoPeticion.EMPLEADO = te_empleado.padStart(6,"0");
+            dispatch(appStartGetInsert(cuerpoPeticion));
+            
+            locals = localStorage.getItem("lista");
 
-
-          reset();
+            setElement(JSON.parse(localStorage.getItem("lista")));
+/*
+            setEscaneado(true);
+            if(escaneado){
+                cargaTabla();
+            }*/
+            reset();
         }
       }
 
+    content = locals.map((post) =>
+        <div key={post.id}>
+        <p>{post.id} - {post.value}</p>
+        </div>
+    );
+
+      const cargaTabla = () => {
+        
+    }
+
       useEffect(() => {
-            te_empleado_ref.current.focus();
+        te_empleado_ref.current.focus();
+        
+        setElement(JSON.parse(localStorage.getItem("lista")));
+        
       }, [])
+/*
+    const players = [
+        {position:"Delantero", name:"Jesus", team:"Patriots"},
+        {position:"Defensa", name:"Mariano", team:"Barcelona"},
+        {position:"Portero", name:"Monse", team:"Pumas"},
+        {position:"Medio", name:"Lopez", team:"Madrid"}
+    ]
+
+    const renderPlayer = (player, index) => {
+        return(
+            <tr key={index}>
+                <th>{player.position}</th>
+                <th>{player.name}</th>
+                <th>{player.team}</th>
+            </tr>
+        )
+    }*/
+
+    let empleados = [
+        
+    ]
+
+    empleados = JSON.parse(localStorage.getItem("lista"));
+
+    const renderEmpleados = (empelado, index) => {
+        return(
+            <tr key={index}>
+                <th>{empelado.id}</th>
+                <th>{empelado.value}</th>
+            </tr>
+        )
+    }
 
     return (
         <>
             <Encabezado titulo = "Captura de tiempo extra" />
+
             
             
             <div className="row textos__separador30" >
@@ -53,6 +133,10 @@ export const CapturaTiempoExtraScreen = () => {
                 </div>
                 <div className="col-md-7">
                 
+                {element.length > 0  &&
+                <ul>
+                    {element.map(renderObjetos)}
+                </ul>}
                 </div>
             </div>
             <div className="row">
@@ -102,19 +186,13 @@ export const CapturaTiempoExtraScreen = () => {
                 <table className="table">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Team</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Lista de TE 1</td>
-                            <td>03/03/2021</td>
-                            <td>Pendiente</td>
-                            </tr>
+                            {empleados.map(renderEmpleados)}
                         </tbody>
                     </table>
                 </div>

@@ -10,8 +10,8 @@ export const LoginScreen = () => {
     const { loading } = useSelector( state => state.uiReducer );
 
     const [ formValues, handleInputChange ] = useFormulario({
-        email: 'JFERNAND',
-        password: 'perrei93'
+        email: 'NVILLA',
+        password: 'normis'
     });
 
     const { email, password } = formValues;

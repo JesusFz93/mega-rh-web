@@ -21,4 +21,20 @@ export const types = {
 
     eventLogout: '[Event] Event logout',
 
+    getEmpleado: '[Empleado] Get Empleado',
+
+    appElementSetActive: '[Element] Set active',
+
+    
+
+    appGetElements: '[Element] Get elements',
+    appGetElement: '[Element] Get element',
+    appStartInsertElement: '[Element] Start Insert element',
+    appInsertElement: '[Element] Insert element',
+    appUpdateElement: '[Element] Update element',
+    appDeleteElement: '[Element] Delete element',
+
+    appInsertObject: '[Object] Insert object',
+    appGetObject: '[Object] Get object',
+
 }
