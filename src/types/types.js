@@ -37,4 +37,6 @@ export const types = {
     appInsertObject: '[Object] Insert object',
     appGetObject: '[Object] Get object',
 
+    appInsert: '[Element] Insert Element',
+
 }

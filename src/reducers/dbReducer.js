@@ -48,6 +48,12 @@ export const dbReducer = ( state = initialState, action ) => {
                 ...state,
                 elementos: [...action.payload]
             }
+        
+        case types.appInsert:
+            return {
+                ...state,
+                elementos: [action.payload]
+            }
             
         case types.appUpdateElement:
             return {

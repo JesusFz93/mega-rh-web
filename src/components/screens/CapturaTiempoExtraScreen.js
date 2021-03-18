@@ -5,7 +5,7 @@ import {useFormulario} from '../../hooks/useForm';
 import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { appStartGetInsert, appStartGetElementsAction, appStartGetElementAction, appStartUpdateListaAction, appStartDeleteElementAction, appStartInsertListaAction} from '../../actions/dbActions';
+import { appStartGetInsert, appInsert, appStartGetElementsAction, appStartGetElementAction, appStartUpdateListaAction, appStartDeleteElementAction, appStartInsertListaAction} from '../../actions/dbActions';
 
 
 
@@ -13,32 +13,10 @@ export const CapturaTiempoExtraScreen = () => {
 
     const {elementos} = useSelector(state => state.dbReducer)
     const dispatch = useDispatch();
-
-    const [element, setElement] = useState({});
-
-    const renderObjetos = (item, index) => {
-        return(
-            <li key={index}>{item.id} - {item.value}</li>
-        )
-    }
-
+    const [ element, setElement ] = useState({});
     const [ formValues, handleInputChange, reset ] = useFormulario({te_empleado: ''});
-
     const { te_empleado } = formValues;
-
     const te_empleado_ref = useRef();
-
-    let content = "";
-
-    const handleSearch = () => {
-        // El empleado excede las 9 horas
-        Swal.fire({
-            icon: 'warning',
-            title: 'El empleado excede las 9 horas dobles',
-            showConfirmButton: false,
-            timer: 1500
-          })
-    }
 
     const cuerpoPeticion = {
         "EMPLEADO":""
@@ -55,65 +33,39 @@ export const CapturaTiempoExtraScreen = () => {
         if (e.key === 'Enter') {
 
             cuerpoPeticion.EMPLEADO = te_empleado.padStart(6,"0");
-            dispatch(appStartGetInsert(cuerpoPeticion));
-            
-            locals = localStorage.getItem("lista");
+            locals = JSON.parse(localStorage.getItem("lista"));
 
-            setElement(JSON.parse(localStorage.getItem("lista")));
-/*
-            setEscaneado(true);
-            if(escaneado){
-                cargaTabla();
-            }*/
+            console.log(locals.find(cuerpoPeticion.EMPLEADO))
+
+            dispatch(appStartGetInsert(cuerpoPeticion, locals));
+            
+            
+
+            
             reset();
         }
       }
 
-    content = locals.map((post) =>
-        <div key={post.id}>
-        <p>{post.id} - {post.value}</p>
-        </div>
-    );
-
-      const cargaTabla = () => {
-        
-    }
+      useEffect(() => {
+        setElement(JSON.parse(localStorage.getItem("lista")));
+      }, [elementos])
 
       useEffect(() => {
         te_empleado_ref.current.focus();
-        
-        setElement(JSON.parse(localStorage.getItem("lista")));
-        
       }, [])
-/*
-    const players = [
-        {position:"Delantero", name:"Jesus", team:"Patriots"},
-        {position:"Defensa", name:"Mariano", team:"Barcelona"},
-        {position:"Portero", name:"Monse", team:"Pumas"},
-        {position:"Medio", name:"Lopez", team:"Madrid"}
-    ]
-
-    const renderPlayer = (player, index) => {
-        return(
-            <tr key={index}>
-                <th>{player.position}</th>
-                <th>{player.name}</th>
-                <th>{player.team}</th>
-            </tr>
-        )
-    }*/
-
-    let empleados = [
-        
-    ]
-
-    empleados = JSON.parse(localStorage.getItem("lista"));
+      
+    // [{"id":"000071", "value":"JESUS BALTAZAR FERNANDEZ PALLARES"}]
 
     const renderEmpleados = (empelado, index) => {
         return(
             <tr key={index}>
-                <th>{empelado.id}</th>
-                <th>{empelado.value}</th>
+                <th>{empelado.EMPLEADO}</th>
+                <th>{empelado.NOMBRE}</th>
+                <th>{empelado.DOBLES}</th>
+                <th>{empelado.TRIPLES}</th>
+                <th>{0}</th>
+                <th>{empelado.OCUPACION}</th>
+                <th>{empelado.CIUDAD}</th>
             </tr>
         )
     }
@@ -133,66 +85,25 @@ export const CapturaTiempoExtraScreen = () => {
                 </div>
                 <div className="col-md-7">
                 
-                {element.length > 0  &&
-                <ul>
-                    {element.map(renderObjetos)}
-                </ul>}
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-7">
+                <div className="col-md-12">
                     <h3>Empleados</h3>
                     <table className="table">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Fecha</th>
                             <th scope="col">Dobles</th>
                             <th scope="col">Triples</th>
                             <th scope="col">Solicitadas</th>
+                            <th scope="col">Razon</th>
+                            <th scope="col">Riobravo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">71</th>
-                            <td>Jesus Fernandez</td>
-                            <td>03/03/2021</td>
-                            <td>9</td>
-                            <td>3</td>
-                            <td>3</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">45</th>
-                            <td>Juan Marquez</td>
-                            <td>03/03/2021</td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td>3</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">100</th>
-                            <td>Llia Gamez</td>
-                            <td>03/03/2021</td>
-                            <td>6</td>
-                            <td>0</td>
-                            <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="col-md-5">
-                <h3>Listas</h3>
-                <table className="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Team</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {empleados.map(renderEmpleados)}
+                            {locals.map(renderEmpleados)}
                         </tbody>
                     </table>
                 </div>

@@ -5,10 +5,10 @@ import { fetchSinToken } from '../helpers/fetch';
 import Swal from "sweetalert2";
 
 let empleados = [];
-export const appStartGetInsert = ( param1 ) => {
+export const appStartGetInsert = ( param1, param2 ) => {
     return async( dispatch ) => {
-
-        try {
+/*
+        try {*/
 
             
             const resp = await fetchSinToken('VISTA_PYEM_TE_VALIDACION',param1,'POST');
@@ -22,7 +22,7 @@ export const appStartGetInsert = ( param1 ) => {
                     value: body.elements[0].NOMBRE
                 };
 
-                
+                empleados = param2
                 empleados.push(empleado);
                // empleados.push(empleado);
 
@@ -46,15 +46,20 @@ export const appStartGetInsert = ( param1 ) => {
                     Swal.fire('Error ' + resp.status, body.msj, 'error');
             }
         }
-            
+            /*
         } catch (error) {
             console.log(error.Message);
-        }
+        }*/
     }
 }
 
 const appGetInsert = (elements) => ({
     type: types.appInsertElement,
+    payload: elements
+});
+
+export const appInsert = (elements) => ({
+    type: types.appInsert,
     payload: elements
 });
 

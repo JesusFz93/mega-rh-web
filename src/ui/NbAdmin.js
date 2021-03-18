@@ -88,6 +88,15 @@ export const NbAdmin = () => {
                     >
                         General
                     </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/bross"
+                    >
+                        Bross
+                    </NavLink>
                 </div>
             </div>
 

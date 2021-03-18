@@ -10,6 +10,7 @@ import { CapturaTiempoExtraScreen } from '../components/screens/CapturaTiempoExt
 import { ValidaTiempoExtraScreen } from '../components/screens/ValidaTiempoExtraScreen';
 import { RechazadoTiempoExtraScreen } from '../components/screens/RechazadoTiempoExtraScreen';
 import { GeneralScreen } from '../components/GeneralScreen';
+import { Bross } from '../components/Bross';
 
 export const RtAdminRoutes = () => {
 
@@ -29,6 +30,7 @@ export const RtAdminRoutes = () => {
                     <Route exact path="/validate" component={ ValidaTiempoExtraScreen } />
                     <Route exact path="/rechazate" component={ RechazadoTiempoExtraScreen } />
                     <Route exact path="/general" component={ GeneralScreen } />
+                    <Route exact path="/bross" component={ Bross } />
 
                     <Redirect to="/adminsc" />
                 </Switch>
