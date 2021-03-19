@@ -19,6 +19,12 @@ const initialState = {
 export const dbReducer = ( state = initialState, action ) => {
 
     switch ( action.type ) {
+        
+        case types.appDeleteObject:
+            return {
+                ...state,
+                elementos: state.elementos.filter( note => note.EMPLEADO !== action.payload )
+            }
 
         case types.appInsertObject:
             return {

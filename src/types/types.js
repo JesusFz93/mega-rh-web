@@ -38,5 +38,6 @@ export const types = {
     appGetObject: '[Object] Get object',
 
     appInsert: '[Element] Insert Element',
+    appDeleteObject: '[Object] Delete Object',
 
 }

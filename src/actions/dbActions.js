@@ -4,8 +4,7 @@ import { types } from "../types/types";
 import { fetchSinToken } from '../helpers/fetch';
 import Swal from "sweetalert2";
 
-let empleados = [];
-export const appStartGetInsert = ( param1, param2 ) => {
+export const appStartGetInsert = ( param1, param2, solicitadas ) => {
     return async( dispatch ) => {
 /*
         try {*/
@@ -22,12 +21,21 @@ export const appStartGetInsert = ( param1, param2 ) => {
                     value: body.elements[0].NOMBRE
                 };
 
-                empleados = param2
-                empleados.push(empleado);
+                let emp = body.elements[0].EMPLEADO;
+
+                
+
+                if(!param2.find(t => t.EMPLEADO === body.elements[0].EMPLEADO)){
+                    body.elements[0].SOLICITADAS = solicitadas;
+                    param2.push(body.elements[0]);
+                }
+
+
+                
                // empleados.push(empleado);
 
-
-                localStorage.setItem('lista', JSON.stringify(empleados));
+                
+                localStorage.setItem('lista', JSON.stringify(param2));
 
                 /*
                 Swal.fire({
@@ -57,6 +65,18 @@ const appGetInsert = (elements) => ({
     type: types.appInsertElement,
     payload: elements
 });
+
+export const startDeletingElements = ( id, param2 ) => {
+    return async( dispatch ) => {
+         
+
+        param2.splice(id,1);
+        localStorage.setItem('lista', JSON.stringify(param2));
+
+        dispatch(appGetInsert(param2));
+
+    }
+}
 
 export const appInsert = (elements) => ({
     type: types.appInsert,
