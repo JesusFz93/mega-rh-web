@@ -97,6 +97,15 @@ export const NbAdmin = () => {
                     >
                         Bross
                     </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/formulario"
+                    >
+                        Formulario
+                    </NavLink>
                 </div>
             </div>
 

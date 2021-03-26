@@ -23,8 +23,6 @@ export const appStartGetInsert = ( param1, param2, solicitadas ) => {
 
                 let emp = body.elements[0].EMPLEADO;
 
-                
-
                 if(!param2.find(t => t.EMPLEADO === body.elements[0].EMPLEADO)){
                     body.elements[0].SOLICITADAS = solicitadas;
                     param2.push(body.elements[0]);
@@ -63,6 +61,119 @@ export const appStartGetInsert = ( param1, param2, solicitadas ) => {
 
 const appGetInsert = (elements) => ({
     type: types.appInsertElement,
+    payload: elements
+});
+
+export const appStartInsertLista = ( lista, nombre_lista ) => {
+    return async( dispatch ) => {
+/*
+        try {*/
+
+            const sweeterArray = lista.map(item => {
+                return {
+                    FECHA: '20210326',
+                    NOMBRE_LISTA: nombre_lista.toUpperCase(),
+                    NUM_EMP: item.EMPLEADO, 
+                    NOMBRE_EMP: item.NOMBRE, 
+                    DOBLES: item.DOBLES, 
+                    TRIPLES: item.TRIPLES, 
+                    HORAS_EXTRAS: item.SOLICITADAS, 
+                    OCUPACION: item.OCUPACION, 
+                    FIRMA_EMPLEADO: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 
+                    CIUDAD: item.CIUDAD, 
+                    AREA: item.DEPTO_ID, 
+                    DEP_DESCR: item.DEP_DESCR, 
+                    TURNO: item.TURNO, 
+                    TIPO: item.TIPO
+
+                }
+            });
+            
+            const resp = await fetchSinToken('PYEM_TE_CAPTURA',sweeterArray,'POST');
+            const body = await resp.json();
+console.log(body);
+            if (body.ok) {
+                
+                localStorage.setItem('lista', JSON.stringify([]));
+                dispatch(deleteLista([]));
+
+                Swal.fire({
+                    title: 'Lista creada!',
+                    text: "Los registros han sido capturados.",
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: false
+                })
+
+            } else {
+                
+                if (resp.status === 500) {
+                    console.log(body.msj);
+                    Swal.fire('Error ' + resp.status, body.msj, 'error');
+                } else {
+                    Swal.fire('Error ' + resp.status, body.msj, 'error');
+            }
+        }
+            /*
+        } catch (error) {
+            console.log(error.Message);
+        }*/
+    }
+}
+
+export const appStartInsertCandidatos = ( nombre_lista ) => {
+    return async( dispatch ) => {
+/*
+        try {*/
+
+            const sweeterObject = {
+                FECHA: '20210326',
+                NOMBRE_LISTA: nombre_lista.toUpperCase(),
+                JEFE_NOM: 'MARIO SANCHEZ', 
+                STATUS: 'P', 
+                RESPONSABLE: 'MASANCHEZ', 
+                FECHA_RESPONSABLE: Date(), 
+                CANT_REQUERIDA: 3
+            };
+
+            console.log(sweeterObject);
+            
+            const resp = await fetchSinToken('PYEM_TE_LISTAS',sweeterObject,'POST');
+            const body = await resp.json();
+console.log(body);
+            if (body.ok) {
+                localStorage.setItem('lista', JSON.stringify([]));
+                dispatch(deleteLista([]));
+                
+            } else {
+                
+                if (resp.status === 500) {
+                    console.log(body.msj);
+                    Swal.fire('Error ' + resp.status, body.msj, 'error');
+                } else {
+                    Swal.fire('Error ' + resp.status, body.msj, 'error');
+            }
+        }
+            /*
+        } catch (error) {
+            console.log(error.Message);
+        }*/
+    }
+}
+
+export const startDeletingLista = (  ) => {
+    return async( dispatch ) => {
+         
+        console.log('eliminado');
+        localStorage.setItem('lista', JSON.stringify([]));
+
+        dispatch(deleteLista([]));
+
+    }
+}
+
+const deleteLista = (elements) => ({
+    type: types.appDeleteLista,
     payload: elements
 });
 

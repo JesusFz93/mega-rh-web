@@ -20,6 +20,12 @@ export const dbReducer = ( state = initialState, action ) => {
 
     switch ( action.type ) {
         
+        case types.appDeleteLista:
+            return {
+                ...state,
+                elementos: action.payload
+            }
+        
         case types.appDeleteObject:
             return {
                 ...state,

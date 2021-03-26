@@ -40,4 +40,6 @@ export const types = {
     appInsert: '[Element] Insert Element',
     appDeleteObject: '[Object] Delete Object',
 
+    appDeleteLista: '[Lista] Delete Lista',
+
 }
