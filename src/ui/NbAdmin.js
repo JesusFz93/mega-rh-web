@@ -106,6 +106,24 @@ export const NbAdmin = () => {
                     >
                         Formulario
                     </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/basic-table"
+                    >
+                        Basic_table
+                    </NavLink>
+                    
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/props-sender"
+                    >
+                        Props_sender
+                    </NavLink>
                 </div>
             </div>
 

@@ -12,6 +12,8 @@ import { RechazadoTiempoExtraScreen } from '../components/screens/RechazadoTiemp
 import { GeneralScreen } from '../components/GeneralScreen';
 import { Bross } from '../components/Bross';
 import { FormularioScreen } from '../components/screens/FormularioScreen';
+import { BasicTable } from '../ui/table/BasicTable'
+import { PropsSender } from '../components/screens/PropsSender'
 
 export const RtAdminRoutes = () => {
 
@@ -33,6 +35,8 @@ export const RtAdminRoutes = () => {
                     <Route exact path="/general" component={ GeneralScreen } />
                     <Route exact path="/bross" component={ Bross } />
                     <Route exact path="/formulario" component={ FormularioScreen } />
+                    <Route exact path="/basic-table" component={ BasicTable } />
+                    <Route exact path="/props-sender" component={ PropsSender } />
 
                     <Redirect to="/adminsc" />
                 </Switch>

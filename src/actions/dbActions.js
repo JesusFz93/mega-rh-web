@@ -10,10 +10,12 @@ export const appStartGetInsert = ( param1, param2, solicitadas ) => {
         try {*/
 
             
-            const resp = await fetchSinToken('VISTA_PYEM_TE_VALIDACION',param1,'POST');
+            const resp = await fetchSinToken('VISTA_PYEM_TE_VALIDACION_TEMP',param1,'POST');
             const body = await resp.json();
 
             if (body.ok) {
+
+                console.log(body);
                 dispatch(appGetInsert(body.elements));
                 
                 let empleado = {
@@ -22,6 +24,8 @@ export const appStartGetInsert = ( param1, param2, solicitadas ) => {
                 };
 
                 let emp = body.elements[0].EMPLEADO;
+
+                
 
                 if(!param2.find(t => t.EMPLEADO === body.elements[0].EMPLEADO)){
                     body.elements[0].SOLICITADAS = solicitadas;
@@ -180,7 +184,7 @@ const deleteLista = (elements) => ({
 export const startDeletingElements = ( id, param2 ) => {
     return async( dispatch ) => {
          
-
+       // console.log(id, param2);
         param2.splice(id,1);
         localStorage.setItem('lista', JSON.stringify(param2));
 

@@ -27,9 +27,8 @@ export const CapturaTiempoExtraScreen = () => {
     const {elementos} = useSelector(state => state.dbReducer)
     const dispatch = useDispatch();
     const [ element, setElement ] = useState({});
-    const [empleadoProp, setEmpleadoProp] = useState({info:""})
     const te_empleado_ref = useRef();
-    let te_emp = ''
+
     
 
     const cuerpoPeticion = {
@@ -50,12 +49,9 @@ export const CapturaTiempoExtraScreen = () => {
             localStorage.setItem('lista', JSON.stringify([]));
           }
 
-        
         cuerpoPeticion.EMPLEADO = data.te_empleado.padStart(6,"0");
         cuerpoPeticion.HRAS_SOLICITADAS = (Math.round(data.solicitadas * 100) / 100).toFixed(2); 
         locals = JSON.parse(localStorage.getItem("lista"));
-        
-        setEmpleadoProp({info:cuerpoPeticion.EMPLEADO}); 
 
         dispatch(appStartGetInsert(cuerpoPeticion, locals, cuerpoPeticion.HRAS_SOLICITADAS));
 
@@ -139,16 +135,13 @@ export const CapturaTiempoExtraScreen = () => {
 
       }
 
-      
-      let componentes = <CapturaTiempoExtraTable te_empleado = {empleadoProp.info} locals={locals} />;
-
       useEffect(() => {
         setElement(JSON.parse(localStorage.getItem("lista")));
+        <CapturaTiempoExtraTable locals={locals} />
       }, [elementos])
 
       useEffect(() => {
         te_empleado_ref.current.focus()
-        componentes = <CapturaTiempoExtraTable te_empleado = {empleadoProp.info} locals={locals} />
 
         let d = new Date();
         let n = d.getDay();
@@ -247,9 +240,7 @@ export const CapturaTiempoExtraScreen = () => {
             { /* <TiempoExtraModal /> */}
             </form>
 
-            {
-                componentes    
-            }
+            <CapturaTiempoExtraTable locals={locals} />
         </>
     )
 }

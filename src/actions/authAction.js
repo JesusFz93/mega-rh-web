@@ -24,6 +24,7 @@ export const startLoginEmailPassword = (param1) => {
                  localStorage.setItem('id', body.elements[0].Id );
                  localStorage.setItem('user_id', body.elements[0].USER_ID );
                  localStorage.setItem('rol_name', body.elements[0].RolName );
+                 localStorage.setItem('DEP_DESCR', body.elements[0].DEP_DESCR);
 
                  dispatch(login( body.elements[0].Id, body.elements[0].USER_ID ));
 
